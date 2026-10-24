@@ -1,0 +1,48 @@
+<header class="site-header" data-header>
+  <div class="wrap site-header__inner">
+    <a class="brand" href="/">
+      {{brandLockup}}
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {{nav}}
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm nav__cta" href="/contact/">
+        Request a Quote
+        <svg class="icon icon--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="icon nav-toggle__open" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
+        <svg class="icon nav-toggle__close" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav" data-mobile-nav>
+  <nav aria-label="Mobile">
+    {{mobileNav}}
+  </nav>
+
+  <a class="btn btn--primary mobile-nav__cta" href="/contact/">
+    Request a Quote
+    <svg class="icon icon--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+  </a>
+
+  <div class="mobile-nav__contact">
+    <a href="{{links.tel}}">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg>
+      {{contact.phoneDisplay}}
+    </a>
+    <a href="{{links.email}}">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>
+      {{contact.email}}
+    </a>
+    <a href="{{links.whatsapp}}" target="_blank" rel="noopener">
+      <svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg>
+      Chat on WhatsApp
+    </a>
+  </div>
+</div>

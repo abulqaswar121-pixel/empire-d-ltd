@@ -1,0 +1,53 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__main">
+      <div class="footer__brand">
+        <a class="brand" href="/">
+          {{brandLockup}}
+        </a>
+        <p class="footer__tagline">Education at our core — with logistics and procurement that deliver on it.</p>
+      </div>
+
+      <ul class="footer__contact" role="list">
+        <li>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg>
+          <address>{{addressHtml}}</address>
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg>
+          <a href="{{links.tel}}">{{contact.phoneDisplay}}</a>
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg>
+          <a href="{{links.email}}">{{contact.email}}</a>
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>
+          <span>{{hoursLine}}</span>
+        </li>
+      </ul>
+
+      <div class="footer__action">
+        <a class="footer__wa" href="{{links.whatsapp}}" target="_blank" rel="noopener">
+          <svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg>
+          WhatsApp us
+        </a>
+        <a class="link-arrow" href="/contact/" style="color:#fff">
+          Request a quote
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {{year}} {{company.legalName}} · {{company.rcNumber}}</p>
+      <ul role="list">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/education/">Education</a></li>
+        <li><a href="/logistics/">Logistics</a></li>
+        <li><a href="/procurement/">Procurement</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

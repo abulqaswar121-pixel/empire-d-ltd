@@ -1,0 +1,84 @@
+{
+  "placeholder-about-team": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "placeholder-contact": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "placeholder-education-materials": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "placeholder-elearning": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "placeholder-hero-education": {
+    "width": 1672,
+    "height": 941,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440,
+      1600
+    ]
+  },
+  "placeholder-logistics": {
+    "width": 1672,
+    "height": 941,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440,
+      1600
+    ]
+  },
+  "placeholder-procurement-meeting": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "placeholder-procurement": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  }
+}

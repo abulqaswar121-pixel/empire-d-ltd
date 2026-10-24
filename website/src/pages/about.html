@@ -1,0 +1,178 @@
+<!-- ═══════════════════════════════════════════════════════════════════════
+     ABOUT — story, mission, why choose us
+     ★ SAMPLE CONTENT — replace the story details and statistics with the real ones.
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<main id="main">
+  <!-- ── Page hero ──────────────────────────────────────────────────────── -->
+  <section class="page-hero" aria-labelledby="page-title">
+    <div class="wrap page-hero__inner page-hero__inner--single">
+      <div class="page-hero__text">
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb" role="list">
+            <li><a href="/">Home</a></li>
+            <li aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-chevron-right"></use></svg></li>
+            <li aria-current="page">About</li>
+          </ol>
+        </nav>
+        <p class="eyebrow" style="margin-top:1.25rem">About us</p>
+        <h1 id="page-title">A Nigerian company with education at its core.</h1>
+        <p class="page-hero__lead">
+          {{company.name}} brings learning, logistics and procurement together under one roof —
+          so schools, institutions and organisations can work with one dependable partner
+          instead of several.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Our story ──────────────────────────────────────────────────────── -->
+  <section class="section" aria-labelledby="story-title">
+    <div class="wrap">
+      <div class="split split--wide-text">
+        <div class="split__media" data-reveal>
+          <!-- PLACEHOLDER IMAGE — swap src/images/placeholder-about-team.jpg -->
+          {{img|name=placeholder-about-team|alt=Three colleagues reviewing documents in a bright office overlooking a city|sizes=(min-width: 900px) 50vw, 100vw}}
+          <p class="split__badge"><strong>Since {{company.founded}}</strong><span>Our story</span></p>
+        </div>
+
+        <div class="split__body" data-reveal style="--d:.08s">
+          <p class="eyebrow">Our story</p>
+          <h2 class="h2" id="story-title">Built from the classroom outwards.</h2>
+          <p>
+            <!-- ★ SAMPLE STORY -->
+            {{company.name}} began with a straightforward observation: the gap in Nigerian education
+            is rarely about ambition — it is about access. Access to good teaching, to the right
+            learning materials, and to the equipment that makes modern learning possible.
+          </p>
+          <p>
+            We started out supporting schools and training providers with materials and learning
+            support. As demand grew, so did the request around it: <strong>can you deliver it too?</strong>
+            and <strong>can you source the rest of what we need?</strong> Today, education remains our
+            lead business, with logistics and general procurement operating alongside it as
+            services in their own right.
+          </p>
+          <p>
+            The result is a company that can run a programme end to end — from the content and
+            the equipment, to the delivery at your gate, with one team answering for all of it.
+          </p>
+
+          <div class="stats">
+            <div class="stat"><strong>{{company.founded}}</strong><span>Year founded</span></div>
+            <div class="stat"><strong>3</strong><span>Service lines</span></div>
+            <div class="stat"><strong>Nationwide</strong><span>Delivery reach</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Mission ────────────────────────────────────────────────────────── -->
+  <section class="section section--mist" aria-labelledby="mission-title">
+    <div class="wrap">
+      <figure class="statement" data-reveal>
+        <blockquote id="mission-title">
+          Our mission is simple: make quality education — and everything that
+          <em>supports</em> it — easier to access in Nigeria.
+        </blockquote>
+        <figcaption>Mission &middot; {{company.name}}</figcaption>
+      </figure>
+
+      <div class="features features--3">
+        <article class="feature" data-reveal style="--d:.05s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-target"></use></svg></span>
+          <h3>Mission</h3>
+          <p>
+            To improve access to quality education by combining practical learning services
+            with reliable supply and delivery.
+          </p>
+        </article>
+        <article class="feature" data-reveal style="--d:.12s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"></use></svg></span>
+          <h3>Vision</h3>
+          <p>
+            To be the partner Nigerian schools, institutions and organisations trust for
+            education, logistics and procurement alike.
+          </p>
+        </article>
+        <article class="feature" data-reveal style="--d:.19s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spark"></use></svg></span>
+          <h3>Our approach</h3>
+          <p>
+            One team, one point of contact — with clear pricing, honest timelines and
+            follow-through after delivery.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why choose us ──────────────────────────────────────────────────── -->
+  <section class="section" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="section-head section-head--split" data-reveal>
+        <div>
+          <p class="eyebrow">Why choose us</p>
+          <h2 class="h2" id="why-title">The reasons clients stay with us.</h2>
+        </div>
+        <p class="lead">
+          We are small enough to answer the phone and structured enough to handle
+          institutional requirements.
+        </p>
+      </div>
+
+      <div class="features features--3">
+        <article class="feature" data-reveal style="--d:.03s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-graduation"></use></svg></span>
+          <h3>Education-led focus</h3>
+          <p>Learning is our core business, not a side line. It shapes how we advise on everything else.</p>
+        </article>
+        <article class="feature" data-reveal style="--d:.08s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-route"></use></svg></span>
+          <h3>One partner, three services</h3>
+          <p>Source it, supply it and deliver it through a single team — fewer handovers, fewer excuses.</p>
+        </article>
+        <article class="feature" data-reveal style="--d:.13s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg></span>
+          <h3>Dependable delivery</h3>
+          <p>Committed timelines, honest updates and documented handover at every stage.</p>
+        </article>
+        <article class="feature" data-reveal style="--d:.18s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-doc"></use></svg></span>
+          <h3>Transparent pricing</h3>
+          <p>Clear quotations without hidden charges — built around your specification and budget.</p>
+        </article>
+        <article class="feature" data-reveal style="--d:.23s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-shield"></use></svg></span>
+          <h3>Compliance &amp; paperwork</h3>
+          <p>Purchase orders, invoices, delivery notes and warranty documents handled properly.</p>
+        </article>
+        <article class="feature" data-reveal style="--d:.28s">
+          <span class="feature__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-headset"></use></svg></span>
+          <h3>People who answer</h3>
+          <p>A named contact who knows your order, and replies within one business day.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ────────────────────────────────────────────────────────────── -->
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="wrap cta__inner">
+      <div>
+        <h2 id="cta-title">Let's talk about what you need.</h2>
+        <p>Whether it is a learning programme, a delivery schedule or a procurement list — start with a conversation.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--light btn--lg" href="/contact/">
+          Contact us
+          <svg class="icon icon--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="{{links.whatsapp}}" target="_blank" rel="noopener">
+          <svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
