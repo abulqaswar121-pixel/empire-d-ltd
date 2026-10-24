@@ -41,15 +41,19 @@ After any edit: `npm run build` (or let Netlify rebuild on push).
 **Phone vs WhatsApp.** `phone` and `whatsapp` are digits only, in international format,
 with no `+` or spaces — e.g. `2348012345678`. `phoneDisplay` is what visitors see.
 
-**Accent colour.** Change `brand.accent` to your logo colour and the whole site follows:
-buttons, links, icons, tints, hover states and the favicon are all derived from that one
-value (validated at build time — 6-digit hex only). The PNG/ICO icons and the
-social-sharing cards are rasterised by the image pipeline, so after changing the accent
-run `npm run images && npm run build` to refresh those too.
+**Brand colours.** The site is recoloured to the Empire D logo. The palette lives in
+`src/styles.css` as CSS variables: `--brand-teal #0B6E8A`, `--brand-teal-dark #063D50`,
+`--brand-cyan #19B5D1`, `--brand-silver #C9CED6`, `--brand-blue #0A22B5` (primary buttons),
+`--bg #F7F9FA`, text `#0F1E26` on light and white on dark. Hero overlays and section
+accents use a teal-to-cyan gradient.
 
-**Logo.** Once you have a logo file, drop it in `src/assets/img/` (or anywhere under
-`public/`) and set `brand.logo: "/assets/img/logo.svg"`. Leave it empty and the site uses
-the built-in "E." monogram, which is drawn from your accent colour.
+**Logo.** The logo in use is `src/assets/brand/logo.png` — the client's actual logo,
+extracted from the screenshot they supplied. To swap in cleaner original artwork,
+replace that file (or drop a `logo.svg`/`.jpg`/`.jpeg`/`.webp` alongside it) and run
+`npm run build`. The build uses
+it automatically in the header (44px mobile / 56px desktop, on the white header), the
+footer (on a white rounded plate, since the footer is dark) and as the favicon. If no
+logo file exists at all, the header and footer fall back to the bold text **"Empire D"**.
 
 ---
 
@@ -65,7 +69,7 @@ the built-in "E." monogram, which is drawn from your accent colour.
 | Contact / Request a quote | `src/pages/contact.html` |
 | Thank-you (after a form submit) | `src/pages/thank-you.html` |
 | 404 | `src/pages/404.html` |
-| Shared header, footer, WhatsApp button | `src/partials/*.html` |
+| Shared header, footer, Dee assistant | `src/partials/*.html` |
 | Design tokens & all styles | `src/styles.css` |
 | Behaviour (menu, reveals, form) | `src/main.js` |
 | Page titles, descriptions, nav labels | the `PAGES` array at the top of `build.js` |
@@ -119,6 +123,25 @@ The build also prints a reminder at the end whenever contact details still look 
 placeholders.
 
 ---
+
+## 4b. Dee, the Empire D assistant
+
+The floating WhatsApp button has been replaced by **Dee**, a circular avatar button
+(bottom-right, green "online" dot, gentle pulse). Clicking it opens a chat panel
+(full width on mobile, 380px on desktop) with quick-reply chips: *Education · Logistics ·
+General Procurement · Request a Quote · Contact the team*.
+
+- **Answers today are scripted** from `src/data/assistant-knowledge.ts` (converted at
+  build time to `assets/js/assistant-knowledge.js`). Dee never invents prices, dates or
+  promises; for quotes or anything she can't answer she says the team will confirm and
+  offers the quote form or a *Chat on WhatsApp* button inside the panel.
+- **IELTS Tutorials, Port Harcourt** is listed on the Education page and in Dee's
+  knowledge marked *to be confirmed with client* — no schedule or fee is stated.
+- **Going live with real AI later:** `netlify/functions/chat.js` is a stub served at
+  `/.netlify/functions/chat`. Set `DEE_AI_API_KEY` in *Netlify → Site settings →
+  Environment variables* and wire the provider call where marked `TODO` in that file.
+  The key is read from the environment on the server only — never put it in front-end
+  code or in this repo.
 
 ## 5. Deploy to Netlify
 
@@ -176,7 +199,7 @@ photography, restrained scroll reveals, full respect for `prefers-reduced-motion
 **Technical**
 
 - Sticky navigation with a mobile drawer (keyboard accessible, closes on Escape)
-- Floating WhatsApp button on every page
+- Floating **Dee** AI assistant on every page (scripted answers today; see below)
 - Plain HTML form with `data-netlify="true"`
 - Per-page `<title>`, meta description, canonical URL, Open Graph and Twitter tags
 - schema.org `Organization` markup (with departments and a service catalogue) on every
@@ -204,7 +227,7 @@ build.js              ← static builder (no dependencies)
 netlify.toml          ← deploy, headers, caching
 src/
   pages/              page content
-  partials/           header, footer, icons, WhatsApp button
+  partials/           header, footer, icons, Dee assistant
   styles.css          design tokens + all styles
   main.js             behaviour
   fonts/              @font-face declarations

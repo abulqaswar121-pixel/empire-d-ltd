@@ -1,0 +1,75 @@
+<!-- ── Dee, Empire D assistant (replaces the floating WhatsApp button) ── -->
+<div class="dee" data-dee data-quote-href="/contact/" data-whatsapp-href="{{links.whatsapp}}">
+  <button
+    class="dee-fab"
+    type="button"
+    data-dee-open
+    aria-expanded="false"
+    aria-controls="dee-panel"
+    aria-label="Chat with Dee, Empire D assistant"
+  >
+    <svg class="dee-avatar dee-avatar--fab" aria-hidden="true" focusable="false"><use href="#i-dee"></use></svg>
+    <span class="dee-fab__dot" aria-hidden="true"></span>
+  </button>
+
+  <section
+    class="dee-panel"
+    id="dee-panel"
+    data-dee-panel
+    hidden
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="dee-title"
+  >
+    <header class="dee-panel__head">
+      <svg class="dee-avatar dee-avatar--head" aria-hidden="true" focusable="false"><use href="#i-dee"></use></svg>
+      <div class="dee-panel__identity">
+        <h2 class="dee-panel__name" id="dee-title">Dee</h2>
+        <p class="dee-panel__role">Empire D assistant <span class="dee-panel__online"><span class="dee-panel__dot" aria-hidden="true"></span>Online</span></p>
+      </div>
+      <button class="dee-panel__close" type="button" data-dee-close aria-label="Close chat with Dee">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
+      </button>
+    </header>
+
+    <div class="dee-messages" data-dee-messages role="log" aria-live="polite" aria-label="Conversation with Dee">
+      <div class="dee-msg dee-msg--bot">
+        <p>Hello! I'm Dee, Empire D's virtual assistant. How can I help you today?</p>
+      </div>
+    </div>
+
+    <div class="dee-chips" role="group" aria-label="Suggested topics">
+      <button class="dee-chip" type="button" data-dee-chip="Education">Education</button>
+      <button class="dee-chip" type="button" data-dee-chip="Logistics">Logistics</button>
+      <button class="dee-chip" type="button" data-dee-chip="General Procurement">General Procurement</button>
+      <button class="dee-chip" type="button" data-dee-chip="Request a Quote">Request a Quote</button>
+      <button class="dee-chip" type="button" data-dee-chip="Contact the team">Contact the team</button>
+    </div>
+
+    <div class="dee-actions">
+      <a class="dee-action dee-action--quote" href="/contact/">Request a Quote</a>
+      <a class="dee-action dee-action--whatsapp" href="{{links.whatsapp}}" target="_blank" rel="noopener">
+        <svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+
+    <form class="dee-form" data-dee-form>
+      <label class="sr-only" for="dee-input">Message Dee</label>
+      <input
+        class="dee-input"
+        id="dee-input"
+        data-dee-input
+        type="text"
+        name="message"
+        placeholder="Type your message…"
+        autocomplete="off"
+        maxlength="500"
+      >
+      <button class="dee-send" type="submit" aria-label="Send message to Dee">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"></use></svg>
+      </button>
+    </form>
+    <p class="dee-note">Dee gives general information from this website. The team confirms all quotes and details.</p>
+  </section>
+</div>
