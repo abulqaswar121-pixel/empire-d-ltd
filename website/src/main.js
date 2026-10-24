@@ -18,6 +18,27 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  /* ── Theme toggle: light by default, dark only when tapped ─────────── */
+  var themeToggle = doc.querySelector("[data-theme-toggle]");
+  if (themeToggle) {
+    var syncTheme = function () {
+      var dark = root.dataset.theme === "dark";
+      themeToggle.setAttribute("aria-pressed", String(dark));
+      themeToggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    };
+    syncTheme();
+    themeToggle.addEventListener("click", function () {
+      var next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem("empire-d-theme-v2", next);
+      } catch (e) {
+        /* storage unavailable — theme still applies for this visit */
+      }
+      syncTheme();
+    });
+  }
+
   /* ── Mobile navigation ───────────────────────────────────────────────── */
   var toggle = doc.querySelector("[data-nav-toggle]");
   var drawer = doc.querySelector("[data-mobile-nav]");

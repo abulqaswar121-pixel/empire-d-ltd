@@ -38,7 +38,7 @@ BRAND.mkdir(parents=True, exist_ok=True)
 WIDTHS = [480, 768, 1080, 1440, 1600]
 WEBP_Q, JPG_Q = 80, 82
 
-NAVY = (8, 26, 51)
+NAVY = (6, 61, 80)  # brand teal-dark #063D50
 WHITE = (255, 255, 255)
 
 
@@ -184,7 +184,7 @@ ACCENT_DOT = (47, 42, 53, 48)
 
 
 def draw_mark(size: int, radius_ratio=0.235, background=True) -> Image.Image:
-    """Navy rounded square with a geometric 'E' and an accent full stop."""
+    """Teal-dark rounded square with a geometric 'E' and an accent full stop."""
     scale = size / 64
     im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
@@ -207,7 +207,7 @@ def brand_assets():
     """favicon.svg + PNG/ICO fallbacks."""
     hexa = ACCENT
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="{CFG['company']['name']}">
-  <rect width="64" height="64" rx="15" fill="#081A33"/>
+  <rect width="64" height="64" rx="15" fill="#063D50"/>
   <path d="M20 17h24v6H27v6h11v6H27v7h17v6H20z" fill="#FFFFFF"/>
   <rect x="47" y="42" width="6" height="6" fill="{hexa}"/>
 </svg>

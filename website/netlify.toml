@@ -16,6 +16,15 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# ── Dee assistant (optional, future) ──────────────────────────────────────
+# The chat works today with scripted answers — no function is required.
+# netlify/functions/chat.js is a stub at /.netlify/functions/chat, ready to
+# connect to a real AI service. To enable it, set the server-only env var
+# DEE_AI_API_KEY in Netlify → Site settings → Environment variables.
+# NEVER put that key in front-end code or in this repo.
+[functions]
+  directory = "netlify/functions"
+
 # ── Security & privacy headers ────────────────────────────────────────────
 [[headers]]
   for = "/*"

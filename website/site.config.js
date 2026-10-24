@@ -31,12 +31,14 @@ const config = {
   /* ── Contact details ─────────────────────────────────────────────────── */
   contact: {
     // How the number is displayed on the site:
-    phoneDisplay: "+234 800 000 0000", // PLACEHOLDER
+    // Client number 0701 500 5111 — used for both calls and WhatsApp:
+    phoneDisplay: "+234 701 500 5111",
     // Same number, digits only, international format (used in tel: links):
-    phone: "+2348000000000", // PLACEHOLDER
+    phone: "+2347015005111",
 
     // WhatsApp: full international number, DIGITS ONLY, no "+" or spaces:
-    whatsapp: "2348000000000", // PLACEHOLDER
+    // Client number 0701 500 5111 → 2347015005111 (used in every WhatsApp link).
+    whatsapp: "2347015005111",
     whatsappMessage: "Hello Empire D Ltd, I would like to make an enquiry.",
 
     email: "hello@empiredltd.com", // PLACEHOLDER
@@ -62,11 +64,16 @@ const config = {
 
   /* ── Branding ────────────────────────────────────────────────────────── */
   brand: {
-    // The single warm accent colour. Change this one value to match the logo.
-    // Everything else (hover states, tints, favicon) is derived from it.
-    accent: "#C8873B",
-    // Optional logo file, e.g. "/assets/img/logo.svg".
-    // Leave empty ("") to use the built-in "ED" monogram.
+    // Empire D logo palette (teal / cyan / silver / wordmark blue).
+    // The full palette lives in src/styles.css as CSS variables:
+    // --brand-teal #0B6E8A · --brand-teal-dark #063D50 · --brand-cyan #19B5D1
+    // --brand-silver #C9CED6 · --brand-blue #0A22B5 · --bg #F7F9FA
+    accent: "#0B6E8A",
+    // Client logo: drop the file at src/assets/brand/logo.png
+    // (.svg, .jpg, .jpeg or .webp also work) and rebuild — build.js finds it
+    // automatically and uses it in the header, footer and as the favicon.
+    // Until that file exists, the header/footer show the bold text "Empire D".
+    // You may also set an explicit path here, e.g. "/assets/img/logo.svg".
     logo: "",
   },
 

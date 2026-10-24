@@ -183,21 +183,24 @@ const hoursHtml = config.contact.hours
   .map((h) => `<div class="hours__row"><span>${esc(h.days)}</span><span>${esc(h.time)}</span></div>`)
   .join("\n            ");
 
-/* Brand lockup: custom logo from site.config.js, or the built-in monogram. */
-const markSvg = `<svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-          <rect width="64" height="64" rx="15" fill="#081A33"></rect>
-          <path d="M20 17h24v6H27v6h11v6H27v7h17v6H20z" fill="#FFFFFF"></path>
-          <rect x="47" y="42" width="6" height="6" fill="${accent}"></rect>
-        </svg>`;
+/* ── Client logo ──────────────────────────────────────────────────────────
+   Drop the client's logo at src/assets/brand/logo.png (.svg/.jpg/.jpeg/
+   .webp also work) and rebuild: it is used in the header, footer and as
+   the favicon automatically. brand.logo in site.config.js overrides this.
+   Until a file exists, the bold text "Empire D" is shown instead.        */
+const LOGO_CANDIDATES = ["logo.png", "logo.svg", "logo.jpg", "logo.jpeg", "logo.webp"];
+const detectedLogoFile = LOGO_CANDIDATES.find((name) =>
+  fs.existsSync(path.join(SRC, "assets/brand", name))
+);
+const logoUrl = config.brand.logo || (detectedLogoFile ? `/${detectedLogoFile}` : "");
+const LOGO_MIME = { ".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp" };
+const faviconLinks = logoUrl
+  ? `<link rel="icon" href="${esc(logoUrl)}" type="${LOGO_MIME[path.extname(logoUrl).toLowerCase()] || "image/png"}">\n  <link rel="apple-touch-icon" href="${esc(logoUrl)}">`
+  : `<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n  <link rel="icon" href="/favicon.ico" sizes="32x32">\n  <link rel="apple-touch-icon" href="/apple-touch-icon.png">`;
 
-const nameParts = config.company.name.trim().split(/\s+/);
-const brandLockup = config.brand.logo
-  ? `<img class="brand__logo" src="${esc(config.brand.logo)}" alt="${esc(config.company.name)}" width="180" height="44">`
-  : `${markSvg}<span class="brand__text"><span class="brand__name">${esc(
-      nameParts.slice(0, -1).join(" ")
-    )} <span>${esc(nameParts.slice(-1)[0])}</span></span><span class="brand__tag">${esc(
-      config.company.tagline
-    )}</span></span>`;
+const brandLockup = logoUrl
+  ? `<img class="brand__logo" src="${esc(logoUrl)}" alt="${esc(config.company.name)}" width="220" height="56">`
+  : `<span class="brand__fallback">Empire D</span>`;
 
 const hoursLine = `${config.contact.hours[0].days}, ${config.contact.hours[0].time}`;
 
@@ -207,6 +210,8 @@ const tokens = {
   contact: config.contact,
   brand: config.brand,
   brandLockup,
+  faviconLinks,
+  logoUrl,
   hoursLine,
   seo: config.seo,
   form: config.form,
@@ -303,7 +308,7 @@ function organisationSchema() {
     url: `${SITE}/`,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE}/assets/img/logo-512.png`,
+      url: logoUrl ? `${SITE}${logoUrl}` : `${SITE}/assets/img/logo-512.png`,
       width: 512,
       height: 512,
     },
@@ -419,11 +424,12 @@ function head(page) {
 
   return `<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var t=localStorage.getItem("empire-d-theme-v2");if(t==="dark"||t==="light"){document.documentElement.dataset.theme=t;}}catch(e){}})();</script>
   <title>${esc(page.title)}</title>
   <meta name="description" content="${esc(page.description)}">
   <link rel="canonical" href="${canonical}">
   ${page.noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="robots" content="index, follow, max-image-preview:large">'}
-  <meta name="theme-color" content="#081A33">
+  <meta name="theme-color" content="#063D50">
   <meta name="format-detection" content="telephone=no">
 
   <!-- Open Graph -->
@@ -444,15 +450,13 @@ function head(page) {
   ${config.seo.twitterHandle ? `<meta name="twitter:site" content="${esc(config.seo.twitterHandle)}">` : ""}
 
   <!-- Icons -->
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  ${faviconLinks}
   <link rel="manifest" href="/site.webmanifest">
 
   <!-- Fonts (self-hosted, preloaded) -->
   <link rel="preload" href="/assets/fonts/manrope-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=4">
 
   <!-- schema.org structured data -->
   ${schemaTags}
@@ -515,6 +519,32 @@ function write(rel, content) {
   fs.writeFileSync(dest, content);
 }
 
+/* ── Dee knowledge: src/data/assistant-knowledge.ts → browser JS ──────────
+   The .ts file is the source of truth. Strip its type-only exports, turn
+   `export const X` into `window.X`, fill config tokens, and fail loudly if
+   any TypeScript-only syntax survives.                                  */
+function assistantKnowledgeJs() {
+  let ts = readSrc("data/assistant-knowledge.ts");
+  // Remove `export interface Name { ... }` blocks (brace-counted).
+  for (;;) {
+    const m = /export\s+interface\s+\w+\s*\{/.exec(ts);
+    if (!m) break;
+    let depth = 0;
+    let i = m.index + m[0].length - 1;
+    for (; i < ts.length; i++) {
+      if (ts[i] === "{") depth++;
+      else if (ts[i] === "}" && --depth === 0) break;
+    }
+    ts = ts.slice(0, m.index) + ts.slice(i + 1);
+  }
+  ts = ts.replace(/^export\s+type\s+.*$/gm, "");
+  ts = ts.replace(/^export\s+const\s+(\w+)/gm, "window.$1");
+  ts = ts.replace(/\s+as\s+AssistantTopic\[\]/g, "");
+  if (/\bexport\b/.test(ts)) throw new Error("assistant-knowledge.ts: unconverted `export` survived the build transform");
+  const js = render(ts, tokens, "assistant-knowledge.ts");
+  return "/* Generated from src/data/assistant-knowledge.ts — edit that file, then rebuild. */\n" + js;
+}
+
 function build() {
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
@@ -524,14 +554,18 @@ function build() {
   copyDir(path.join(SRC, "assets/fonts"), path.join(OUT, "assets/fonts"));
   copyDir(path.join(SRC, "assets/brand"), path.join(OUT), (n) => !n.endsWith(".md") && n !== "mark.png");
 
-  // Favicon is regenerated from the config so a new accent colour is reflected
-  // immediately. (The PNG/ICO icons come from `npm run images`.)
+  // Interim favicon, drawn from the logo description (teal-to-cyan ring +
+  // twin flame blades + swoosh) until the client's logo file arrives, at
+  // which point head() points the icon links at the logo itself.
   write(
     "favicon.svg",
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="${esc(config.company.name)}">
-  <rect width="64" height="64" rx="15" fill="#081A33"/>
-  <path d="M20 17h24v6H27v6h11v6H27v7h17v6H20z" fill="#FFFFFF"/>
-  <rect x="47" y="42" width="6" height="6" fill="${accent}"/>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B6E8A"/><stop offset="1" stop-color="#19B5D1"/></linearGradient></defs>
+  <rect width="64" height="64" rx="14" fill="#FFFFFF"/>
+  <circle cx="32" cy="30" r="20" fill="none" stroke="url(#g)" stroke-width="5.5" stroke-dasharray="106 20" transform="rotate(-38 32 30)" stroke-linecap="round"/>
+  <path d="M32 15c5.5 6.5 7.5 12 5 17.5-1.8 4-6.8 5-9.5 1.5C25 30.2 27 23.5 29.8 19c.8-1.4 1.5-2.7 2.2-4Z" fill="#0B6E8A"/>
+  <path d="M40.5 23.5c3.8 4.3 4.8 8.8 2.7 12.3-1.6 2.7-5.5 2.8-7 .2-1.2-2.2-.2-6.2 1.8-9.2.9-1.3 1.7-2.4 2.5-3.3Z" fill="#C9CED6"/>
+  <path d="M17 45.5c9-4.8 21-4.8 30 0-9 4.3-21 4.3-30 0Z" fill="#19B5D1"/>
 </svg>
 `
   );
@@ -539,6 +573,8 @@ function build() {
   const css = render(readSrc("fonts/fonts.css").trim() + "\n\n" + readSrc("styles.css"), tokens, "styles.css");
   write("assets/css/styles.css", css);
   write("assets/js/main.js", readSrc("main.js"));
+  write("assets/js/assistant-knowledge.js", assistantKnowledgeJs());
+  write("assets/js/assistant.js", readSrc("assistant.js"));
 
   fs.mkdirSync(path.join(OUT, "assets/js"), { recursive: true });
 
@@ -569,8 +605,10 @@ function build() {
   {{> header.html }}
   ${body}
   {{> footer.html }}
-  {{> whatsapp.html }}
-  <script src="/assets/js/main.js" defer></script>
+  {{> assistant.html }}
+  <script src="/assets/js/main.js?v=4" defer></script>
+  <script src="/assets/js/assistant-knowledge.js?v=4" defer></script>
+  <script src="/assets/js/assistant.js?v=4" defer></script>
 </body>
 </html>
 `,
@@ -612,7 +650,7 @@ ${urls}
         start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
-        theme_color: "#081A33",
+        theme_color: "#063D50",
         icons: [
           { src: "/logo-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
           { src: "/assets/img/logo-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
