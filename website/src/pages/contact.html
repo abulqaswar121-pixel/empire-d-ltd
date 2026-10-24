@@ -1,0 +1,187 @@
+<!-- ═══════════════════════════════════════════════════════════════════════
+     CONTACT / REQUEST A QUOTE
+     The form posts to Netlify Forms (data-netlify="true") and redirects to
+     /thank-you/ after a successful submission. Form name: "quote-request"
+     (change both here and in site.config.js → form.name if you rename it).
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<main id="main">
+  <!-- ── Page hero ──────────────────────────────────────────────────────── -->
+  <section class="page-hero" aria-labelledby="page-title">
+    <div class="wrap page-hero__inner page-hero__inner--single">
+      <div class="page-hero__text">
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb" role="list">
+            <li><a href="/">Home</a></li>
+            <li aria-hidden="true"><svg class="icon" focusable="false"><use href="#i-chevron-right"></use></svg></li>
+            <li aria-current="page">Contact</li>
+          </ol>
+        </nav>
+        <p class="eyebrow" style="margin-top:1.25rem">Contact &amp; quotes</p>
+        <h1 id="page-title">Tell us what you need. We will reply within one business day.</h1>
+        <p class="page-hero__lead">
+          Quotes, enquiries and partnership requests. Use the form below, or reach us
+          directly by phone, email or WhatsApp.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Form + details ─────────────────────────────────────────────────── -->
+  <section class="section" aria-labelledby="form-title">
+    <div class="wrap contact-grid">
+      <!-- Form -->
+      <div class="detail-card" data-reveal>
+        <h2 class="detail-card__title" id="form-title" style="font-family:var(--font-display);font-weight:800;font-size:1.5rem;color:var(--ink)">
+          Request a quote
+        </h2>
+        <p style="margin-top:.5rem;font-size:.9375rem">
+          The more detail you share, the more accurate our quotation — quantities,
+          timelines and delivery locations help.
+        </p>
+
+        <form
+          class="form"
+          style="margin-top:1.5rem"
+          name="quote-request"
+          method="POST"
+          action="/thank-you/"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          data-quote-form
+        >
+          <input type="hidden" name="form-name" value="quote-request">
+          <p class="honeypot" aria-hidden="true">
+            <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+
+          <div class="form__grid form__grid--2">
+            <div class="field">
+              <label for="name">Full name <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="name" name="name" type="text" autocomplete="name" required placeholder="e.g. Chinedu Okafor">
+            </div>
+            <div class="field">
+              <label for="organisation">Organisation <span class="hint">(optional)</span></label>
+              <input class="input" id="organisation" name="organisation" type="text" autocomplete="organization" placeholder="School, company or agency">
+            </div>
+          </div>
+
+          <div class="form__grid form__grid--2">
+            <div class="field">
+              <label for="email">Email address <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="email" name="email" type="email" autocomplete="email" required placeholder="you@organisation.com">
+            </div>
+            <div class="field">
+              <label for="phone">Phone number <span class="hint">(optional)</span></label>
+              <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+234 800 000 0000">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="service">Service needed <span class="req" aria-hidden="true">*</span></label>
+            <select class="select" id="service" name="service" required data-service>
+              <option value="" disabled selected>Select a service</option>
+              <option value="Education">Education — online learning, e-learning or materials</option>
+              <option value="Logistics">Logistics — haulage, distribution or delivery</option>
+              <option value="General Procurement">General procurement — contracts and supplies</option>
+              <option value="Multiple services">More than one service</option>
+              <option value="Not sure yet">Not sure yet — I'd like advice</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Message <span class="req" aria-hidden="true">*</span></label>
+            <textarea class="textarea" id="message" name="message" required maxlength="4000" placeholder="Tell us what you need, quantities, timelines and location."></textarea>
+          </div>
+
+          <p class="form__status" data-form-status role="alert" hidden></p>
+
+          <div class="form__footer">
+            <button class="btn btn--primary btn--lg" type="submit">
+              Send Enquiry
+              <svg class="icon icon--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+            </button>
+            <p class="form__note">
+              We only use your details to respond to this enquiry. Fields marked
+              <span aria-hidden="true" style="color:var(--accent-ink)">*</span> are required.
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Details -->
+      <aside class="detail-card" aria-labelledby="details-title" data-reveal style="--d:.08s">
+        <h2 class="detail-card__title" id="details-title">Talk to us directly</h2>
+
+        <ul class="detail-list" role="list">
+          <li>
+            <span class="icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg></span>
+            <div>
+              <span class="label">Office</span>
+              <address>
+                <a href="{{links.maps}}" target="_blank" rel="noopener">{{addressHtml}}</a>
+              </address>
+            </div>
+          </li>
+          <li>
+            <span class="icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></span>
+            <div>
+              <span class="label">Phone</span>
+              <a href="{{links.tel}}">{{contact.phoneDisplay}}</a>
+            </div>
+          </li>
+          <li>
+            <span class="icon-wrap"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg></span>
+            <div>
+              <span class="label">Email</span>
+              <a href="{{links.email}}">{{contact.email}}</a>
+            </div>
+          </li>
+          <li>
+            <span class="icon-wrap"><svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg></span>
+            <div>
+              <span class="label">WhatsApp</span>
+              <a href="{{links.whatsapp}}" target="_blank" rel="noopener">Message us on WhatsApp</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="hours">
+          <p class="hours__title">Opening hours</p>
+          <div style="margin-top:.6rem">
+            {{hoursHtml}}
+          </div>
+        </div>
+
+        <a class="btn btn--accent" style="width:100%;margin-top:1.5rem" href="{{links.whatsapp}}" target="_blank" rel="noopener">
+          <svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="#i-whatsapp"></use></svg>
+          Chat on WhatsApp
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ── What happens next ─────────────────────────────────────────────── -->
+  <section class="section section--mist section--tight" aria-labelledby="next-title">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:1.5rem" data-reveal>
+        <p class="eyebrow">After you send</p>
+        <h2 class="h2" id="next-title">What happens next.</h2>
+      </div>
+      <ol class="steps" role="list">
+        <li class="step" data-reveal style="--d:.03s">
+          <h3>We read your brief</h3>
+          <p>Your enquiry goes to the team responsible for that service line.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.09s">
+          <h3>We may ask a question</h3>
+          <p>If anything is unclear, we will call or email — usually the same day.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.15s">
+          <h3>You receive a quote</h3>
+          <p>A clear, itemised quotation within one business day where possible.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</main>

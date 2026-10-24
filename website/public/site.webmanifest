@@ -1,0 +1,29 @@
+{
+  "name": "Empire D Limited",
+  "short_name": "Empire D",
+  "description": "A Nigerian multi-service company with education at its core — delivering online learning, e-learning solutions and educational supplies, alongside logistics and general procurement for public and private organisations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#081A33",
+  "icons": [
+    {
+      "src": "/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "empire-d-ltd",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static corporate website for Empire D Ltd — Education, Logistics, General Procurement.",
+  "scripts": {
+    "build": "node build.js",
+    "images": "python3 tools/images.py",
+    "start": "node tools/serve.js",
+    "dev": "node build.js && node tools/serve.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

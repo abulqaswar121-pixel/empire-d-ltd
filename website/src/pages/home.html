@@ -1,0 +1,110 @@
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HOMEPAGE — deliberately short: hero + three service cards + footer.
+     ★ SAMPLE CONTENT — replace the wording marked with ★ where it appears.
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<main id="main">
+  <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__media">
+      <!-- PLACEHOLDER IMAGE — swap src/images/placeholder-hero-education.jpg -->
+      {{img|name=placeholder-hero-education|alt=A young woman and man studying together on laptops in a bright learning space|sizes=(min-width: 900px) 52vw, 100vw|eager=1|ratio=16:9}}
+    </div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="hero__content">
+        <p class="eyebrow eyebrow--light">Nigerian-owned &middot; Education-led</p>
+        <h1 id="hero-title">Education first.<br>Delivered <span class="hl">everywhere</span>.</h1>
+        <p class="hero__lead">
+          {{company.name}} is a Nigerian company built around education — with the logistics
+          and procurement capability to get learning into the right hands, on time, anywhere
+          in the country.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--light btn--lg" href="#services">
+            Our Services
+            <svg class="icon icon--arrow" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="/contact/">Request a Quote</a>
+        </div>
+      </div>
+
+      <ul class="hero__meta" role="list">
+        <li>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-graduation"></use></svg>
+          Education-led expertise
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-truck"></use></svg>
+          Nationwide delivery
+        </li>
+        <li>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-briefcase"></use></svg>
+          Public &amp; private clients
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Three service cards ────────────────────────────────────────────── -->
+  <section class="section services section--mist" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">What we do</p>
+        <h2 class="h2" id="services-title">Three capabilities. One accountable partner.</h2>
+        <p class="lead">
+          Education is our core business. Logistics and general procurement are how we deliver
+          on it — and how we serve organisations well beyond the classroom.
+        </p>
+      </div>
+
+      <div class="services__grid">
+        <a class="card" href="/education/" data-reveal style="--d:.05s">
+          <span class="card__icon">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-graduation"></use></svg>
+          </span>
+          <h3>Education</h3>
+          <p>
+            Online educational services, e-learning solutions, and the supply of educational
+            materials and computer accessories for schools and institutions.
+          </p>
+          <span class="card__link">
+            Explore <span class="card__link-more">Education</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+          </span>
+        </a>
+
+        <a class="card" href="/logistics/" data-reveal style="--d:.12s">
+          <span class="card__icon">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-truck"></use></svg>
+          </span>
+          <h3>Logistics</h3>
+          <p>
+            Distribution, haulage and last-mile delivery that keep your goods moving —
+            planned, documented and delivered on schedule.
+          </p>
+          <span class="card__link">
+            Explore <span class="card__link-more">Logistics</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+          </span>
+        </a>
+
+        <a class="card" href="/procurement/" data-reveal style="--d:.19s">
+          <span class="card__icon">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-package"></use></svg>
+          </span>
+          <h3>General Procurement</h3>
+          <p>
+            Contracts, supplies and trading for public and private organisations —
+            sourced, checked and delivered end to end.
+          </p>
+          <span class="card__link">
+            Explore <span class="card__link-more">Procurement</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"></use></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
