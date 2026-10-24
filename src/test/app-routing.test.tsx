@@ -14,4 +14,28 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+
+  // Every clean URL the static site links to must have a real route behind
+  // it (each one redirects to its static page in /public); without these,
+  // interior pages render the __root "Page not found" screen in the preview.
+  it.each([
+    "/about",
+    "/about/",
+    "/education",
+    "/education/",
+    "/logistics",
+    "/logistics/",
+    "/procurement",
+    "/procurement/",
+    "/contact",
+    "/contact/",
+    "/thank-you",
+    "/thank-you/",
+  ])("matches a page for %s instead of falling back to not found", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+
+    const matches = router.matchRoutes(path);
+
+    expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+  });
 });

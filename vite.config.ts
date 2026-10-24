@@ -7,6 +7,11 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    // Dev server only: accept preview-proxy hosts (e.g. sandbox/Lovable
+    // preview domains). No effect on production builds.
+    server: { allowedHosts: true },
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
